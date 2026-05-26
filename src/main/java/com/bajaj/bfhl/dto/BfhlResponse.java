@@ -11,7 +11,7 @@ import java.util.List;
 public class BfhlResponse {
 
     @JsonProperty("is_success")
-    private boolean isSuccess;
+    private boolean success;
 
     @JsonProperty("user_id")
     private String userId;
@@ -46,11 +46,11 @@ public class BfhlResponse {
     // ─── Getters & Setters ───────────────────────────────────────────
 
     public boolean isSuccess() {
-        return isSuccess;
+        return success;
     }
 
     public void setSuccess(boolean success) {
-        isSuccess = success;
+        this.success = success;
     }
 
     public String getUserId() {
@@ -134,7 +134,7 @@ public class BfhlResponse {
     public static class Builder {
         private final BfhlResponse response = new BfhlResponse();
 
-        public Builder isSuccess(boolean val)                  { response.isSuccess = val;           return this; }
+        public Builder isSuccess(boolean val)                  { response.success = val;            return this; }
         public Builder userId(String val)                      { response.userId = val;              return this; }
         public Builder email(String val)                       { response.email = val;               return this; }
         public Builder rollNumber(String val)                  { response.rollNumber = val;          return this; }
