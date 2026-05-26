@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
  * REST controller that exposes the /bfhl endpoint.
  */
 @RestController
-@RequestMapping("/bfhl")
 public class BfhlController {
 
     private final BfhlService bfhlService;
@@ -25,7 +24,7 @@ public class BfhlController {
      * POST /bfhl
      * Accepts a JSON body with a "data" array and returns classified results.
      */
-    @PostMapping
+    @PostMapping("/bfhl")
     public ResponseEntity<BfhlResponse> processData(@Valid @RequestBody BfhlRequest request) {
         BfhlResponse response = bfhlService.processData(request);
         return ResponseEntity.ok(response);
@@ -35,11 +34,23 @@ public class BfhlController {
      * GET /bfhl
      * Simple health-check / operation code endpoint (some evaluators test this).
      */
-    @GetMapping
+    @GetMapping("/bfhl")
     public ResponseEntity<OperationCodeResponse> getOperationCode() {
         return ResponseEntity.ok(new OperationCodeResponse(1));
     }
 
+    /**
+     * GET /health
+     * Standard health check endpoint for deployment validation.
+     */
+    @GetMapping("/health")
+    public ResponseEntity<HealthResponse> getHealth() {
+        return ResponseEntity.ok(new HealthResponse("UP"));
+    }
+
     // A tiny inner record for the GET response — keeps things tidy
     record OperationCodeResponse(int operation_code) {}
+    
+    // A tiny inner record for the GET /health response
+    record HealthResponse(String status) {}
 }

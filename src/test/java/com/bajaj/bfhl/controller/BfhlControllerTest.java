@@ -85,4 +85,12 @@ class BfhlControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.operation_code").value(1));
     }
+
+    @Test
+    @DisplayName("GET /health returns health status")
+    void getHealth() throws Exception {
+        mockMvc.perform(get("/health"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.status").value("UP"));
+    }
 }
